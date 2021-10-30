@@ -1,0 +1,73 @@
+.bgCoverBottom{
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bgCover{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover cover;
+}
+.card-img {
+    object-fit: cover;
+    object-position: center;
+}
+.WB{
+    position: absolute;
+    bottom: 10%;
+    right: 12%;
+}
+.rounded-5{
+    border-radius: 20px;
+}
+.settingHover{
+    a:hover{
+        background-color: #c0a4a5;
+    }
+}
+
+//拋棄羞恥心 設死寬高= =
+.w-15{
+    max-width: 15%;
+}
+.h-96{
+    height: 96px;
+}
+.h-150{
+    height: 150px;
+}
+.h-196{
+    height: 196px;
+}
+.h-200{
+    height: 200px;
+}
+.h-300{
+    height: 300px;
+}
+.h-341{
+    height: 341px;
+}
+.h-350{
+    height: 350px;
+}
+.h-420{
+    height: 420px;
+}
+.h-432{
+    height: 432px;
+}
+.h-582{
+    height: 582px;
+}
+.h-628{
+    height: 628px;
+}
+
+//式水溫 改變一下響應式字體大小
+.spaceTitle{
+    font-size: 64px;
+    @include pad(){
+        font-size: 32px;
+    }
+}

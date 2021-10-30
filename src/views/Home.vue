@@ -1,8 +1,9 @@
 <template>
-
+   <Navbar></Navbar>
   <div ref="carousel"
   id="carouselExampleControlsNoTouching" class="carousel slide container-fluid position-relative" data-bs-touch="false" data-bs-interval="false">
-  <h2 class="position-absolute top-50 start-50 translate-middle title p-5">人生苦短 必須拉轉</h2>
+  <h2 class="position-absolute top-50 start-50
+  spaceTitle translate-middle title p-5">人生苦短 必須拉轉</h2>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="../assets/banner-adv.jpg" class="d-block w-100 banner" alt="...">
@@ -39,7 +40,6 @@
 }
 .title{
   z-index: 99;
-  font-size: 64px;
   font-family: 'Zen Kurenaido', sans-serif;
   font-weight: 800;
   background-color: rgba(196, 206, 214, 0.863);
@@ -48,6 +48,7 @@
 </style>
 <script>
 import Carousel from 'bootstrap/js/dist/carousel'
+import Navbar from '../components/Navbar.vue'
 
 export default {
   data () {
@@ -55,6 +56,7 @@ export default {
       carousel: {}
     }
   },
+  components: { Navbar },
   methods: {
 
   },

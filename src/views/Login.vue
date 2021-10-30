@@ -52,13 +52,13 @@ export default {
         .then((res) => {
           console.log(res)
           // 這邊判斷是否登入成功 如果成功就轉頁面到dashboard  success = true
-        //   if (res.data.success) {
-        //     const token = res.data.token
-        //     const offtime = res.data.expired
-        //     console.log(res)
-        //     document.cookie = `doSomethingOnlyOnce=${token};expires=${new Date(offtime)}`
-        //     this.$router.push('/dashboard/products')
-        //   }
+          if (res.data.success) {
+            const token = res.data.token
+            const offtime = res.data.expired
+            console.log(res)
+            document.cookie = `doSomethingOnlyOnce=${token};expires=${new Date(offtime)}`
+            this.$router.push('/dashboard/products')
+          }
         })
     }
   }
