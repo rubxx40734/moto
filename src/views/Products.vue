@@ -22,10 +22,10 @@
       <td>{{item.category}}</td>
       <td>{{item.title}}</td>
       <td class="text-right">
-        {{(item.origin_price)}}
+        {{ currency(item.origin_price) }}
       </td>
       <td class="text-right">
-        {{(item.price)}}
+        {{ currency(item.price) }}
       </td>
       <td>
         <span class="text-success" v-if="item.is_enabled">啟用</span>
@@ -51,11 +51,19 @@ v-bind:product="tempProduct"
 :product="tempProduct"
 @del-product="delProduct"></DelModal>
 
+<ToastMessages></ToastMessages>
+
+<Pagination :pages="pagination"
+@update-page="getProducts"></Pagination>
+
 </template>
 
 <script>
+import { currency } from '../methods/filters.js'
 import ProductModal from '../components/ProductsModal.vue'
 import DelModal from '../components/DelModal.vue'
+import ToastMessages from '../components/ToastMessages.vue'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   data () {
@@ -69,9 +77,13 @@ export default {
   },
   components: {
     ProductModal,
-    DelModal
+    DelModal,
+    ToastMessages,
+    Pagination
   },
+  inject: ['emitter'],
   methods: {
+    currency,
     openModal (isNew, item) {
       if (isNew) {
         this.tempProduct = {}
@@ -118,21 +130,21 @@ export default {
 
       this.axios[httpMethods](api, { data: this.tempProduct })
         .then(res => {
-          console.log(res)
-          // if (res.data.success) {
-          //   this.emitter.emit('push-message', {
-          //     style: 'success',
-          //     title: '更新成功'
-          //   })
-          // } else {
-          //   this.emitter.emit('push-message', {
-          //     style: 'danger',
-          //     title: '更新失敗><',
-          //     content: res.data.message.join('、')
-          //   })
-          // }
+          if (res.data.success) {
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '更新成功'
+            })
+          } else {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '更新失敗><',
+              content: res.data.message.join('、')
+            })
+          }
           this.closeModal()
           this.tempProduct = {}
+          this.isLoading = false
           this.getProducts()
         })
     },
@@ -140,12 +152,19 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
       this.axios.delete(url)
         .then(res => {
+          if (res.data.success) {
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '刪除產品成功 ^_^'
+            })
+          }
           console.log(res)
           const delmodal = this.$refs.delModal
           delmodal.hideModal()
           this.getProducts()
         })
     }
+
   },
   created () {
     this.getProducts()

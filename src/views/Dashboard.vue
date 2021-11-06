@@ -1,13 +1,18 @@
 <template>
-    dashboard
-    <Navbar></Navbar>
+    <Navdashboard></Navdashboard>
     <router-view></router-view>
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+import Navdashboard from '../components/Navdashboard.vue'
+import emitter from '../methods/emitter.js'
 export default {
-  components: { Navbar },
+  components: { Navdashboard },
+  provide () {
+    return {
+      emitter
+    }
+  },
   created () {
     // 文件參考https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
     var token = document.cookie.replace(/(?:(?:^|.*;\s*)doSomethingOnlyOnce\s*=\s*([^;]*).*$)|^.*$/, '$1')

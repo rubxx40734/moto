@@ -1,0 +1,29 @@
+<template>
+  <div class="toast-container position-absolute mt-5 top-0 end-0">
+    <Toast v-for="(msg, key) in messages" :key="key"
+      :msg="msg"
+    />
+  </div>
+</template>
+
+<script>
+import Toast from '@/components/Toast.vue'
+
+export default {
+  components: { Toast },
+  data () {
+    return {
+      messages: []
+    }
+  },
+  inject: ['emitter'],
+  mounted () {
+    // 請自行補上 emitter 事件
+    this.emitter.on('push-message', messages => {
+      console.log(messages)
+      const { style, title, content } = messages
+      this.messages.push({ style, title, content })
+    })
+  }
+}
+</script>
