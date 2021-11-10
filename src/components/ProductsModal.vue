@@ -22,7 +22,7 @@
           </div>
           <div class="mb-3">
             <label for="customFile" class="form-label">或 上傳圖片
-              <i class="fas fa-spinner fa-spin"></i>
+
             </label>
             <input type="file" id="customFile" class="form-control"
             ref="fileInput"  @change="uploadFile">
@@ -31,7 +31,7 @@
 
           <div class="mb-3">
             <label for="customFile" class="form-label mt-3">圖片二
-              <i class="fas fa-spinner fa-spin"></i>
+
             </label>
             <input type="file" id="customFile2" class="form-control"
              ref="files2" @change="Imgfn2">
@@ -40,7 +40,7 @@
 
           <div class="mb-3">
             <label for="customFile" class="form-label mt-3">圖片三
-              <i class="fas fa-spinner fa-spin"></i>
+
             </label>
             <input type="file" id="customFile2" class="form-control"
              ref="files3" @change="Imgfn3">
@@ -98,12 +98,12 @@
           <div class="mb-3">
             <label for="description" class="form-label">產品描述</label>
             <textarea type="text" class="form-control" id="description"
-                      placeholder="請輸入產品描述"></textarea>
+                      placeholder="請輸入產品描述" v-model="tempProduct.description"></textarea>
           </div>
           <div class="mb-3">
             <label for="content" class="form-label">說明內容</label>
             <textarea type="text" class="form-control" id="content"
-                      placeholder="請輸入產品說明內容"></textarea>
+                      placeholder="請輸入產品說明內容" v-model="tempProduct.content"></textarea>
           </div>
           <div class="mb-3">
             <div class="form-check">
