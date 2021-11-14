@@ -2,6 +2,7 @@
 <Loading :active="isLoading"></Loading>
   <h1 class="text-center mt-5">車款總覽</h1>
   <div class="container mt-5 mb-5">
+    <ToastMessages></ToastMessages>
     <div class="row">
       <div class="col-md-3">
         <ul class="list-group">
@@ -24,6 +25,7 @@
       </div>
       <div class="col-md-9">
         <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- <ToastMessages></ToastMessages> -->
           <div class="col" v-for="item in carts" :key="item.id">
             <div class="card h-100 position-relative">
               <img
@@ -33,6 +35,10 @@
               <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>
                 <p class="card-text">{{ item.description }}</p>
+                <div class="price d-flex justify-content-between">
+                  <p class="text-decoration-line-through">原價$ {{item.origin_price}}</p>
+                  <p>特價$ {{item.price}}</p>
+                </div>
               </div>
               <div class="card-footer d-flex justify-content-between">
                 <button type="button" class="btn btn-primary btn-sm"
@@ -53,14 +59,20 @@
       </div>
     </div>
   </div>
-
+  <button type="button" class="btn btn-outline-light bg-dark rounded-3 p-2 position-fixed bottom-0 end-0 me-5 mb-5"
+   @click="openoffcanvas">
+   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{{ sendorderlength }}</span>
+   <i class="bi bi-cart3 fs-1"></i>
+   </button>
   <Footer></Footer>
+  <Cartoffcanvas ref="cartoffcanvas" @send="getcartslength"></Cartoffcanvas>
 
 </template>
 
 <script>
-
+import ToastMessages from '../components/ToastMessages.vue'
 import Footer from '../components/Footer.vue'
+import Cartoffcanvas from '../components/Cartoffcanvas.vue'
 
 export default {
   data () {
@@ -70,10 +82,11 @@ export default {
       isLoading: false,
       status: {
         lodingitem: ''
-      }
+      },
+      sendorderlength: ''
     }
   },
-  components: { Footer },
+  components: { Footer, ToastMessages, Cartoffcanvas },
   inject: ['emitter'],
   methods: {
     getCarts () {
@@ -182,6 +195,14 @@ export default {
             })
           }
         })
+    },
+    openoffcanvas () {
+      this.$refs.cartoffcanvas.getorders()
+      this.$refs.cartoffcanvas.showoffcanvas()
+    },
+    getcartslength (item) {
+      this.sendorderlength = item
+      console.log('out', item)
     }
   },
   created () {

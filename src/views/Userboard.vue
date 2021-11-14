@@ -2,17 +2,17 @@
     <Navbar></Navbar>
     <Header></Header>
     <router-view></router-view>
-    <ToastMessage></ToastMessage>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
 import Header from '../components/Header.vue'
-import emitter from '../methods/emitter.js'
-import ToastMessage from '../components/ToastMessages.vue'
+// import emitter from '../methods/emitter.js'
+import mitt from 'mitt'
+const emitter = mitt()
 
 export default {
-  components: { Navbar, Header, ToastMessage },
+  components: { Navbar, Header },
   provide () {
     return {
       emitter

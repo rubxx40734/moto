@@ -63,7 +63,7 @@
     <h3 class="mb-5 text-center text-secondary fw-bold">今晚.... 我想來點?</h3>
     <div class="row">
       <div class="col-md-4 box position-relative mb-4 mb-md-0">
-        <router-link to="/dashboard"
+        <button class="btn btn-outline-light w-100" @click="changesports"
           ><img
             class="cover-fit w-100 bgCover card-img"
             src="../assets/home1.jpg"
@@ -74,7 +74,7 @@
           >
             跑車
           </h4>
-        </router-link>
+        </button>
       </div>
       <div class="col-md-4 box position-relative mb-4 mb-md-0">
         <router-link to="/dashboard"
@@ -128,32 +128,9 @@
       <source src="../assets/w800.mp4" type="video/mp4" />
     </video>
 
-    <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/iCPd7Pilwx0?start=4"
-   title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;" allowfullscreen></iframe> -->
   </div>
 
   <Footer></Footer>
-  <!-- <div class="footer bg-primary p-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <ul class="text-secondary ff-r">
-          <li class="fs-3">哈士騎重機租賃</li>
-          <li>© 2021. All Rights Reserved.</li>
-          <li>※此網頁為作品 後台不得登入修改※</li>
-        </ul>
-      </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-2 d-flex flex-column flex-column-reverse">
-        <ul class="d-flex justify-content-evenly ">
-          <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x text-secondary icohover"></i></a></li>
-          <li><a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x text-secondary icohover"></i></a></li>
-          <li><a href="https://github.com/rubxx40734"><i class="fab fa-github-square fa-2x text-secondary icohover"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div> -->
 </template>
 
 <style>
@@ -208,7 +185,12 @@ export default {
     }
   },
   components: { Navbar, Header, Footer },
-  methods: {},
+  methods: {
+    changesports () {
+      console.log(this.$router)
+      // this.$router.push('/user/cart')
+    }
+  },
   mounted () {
     const myCarousel = this.$refs.carousel
     this.carousel = new Carousel(myCarousel)

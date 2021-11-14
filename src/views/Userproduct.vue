@@ -15,8 +15,8 @@
             <div class="gotobuy d-flex justify-content-between">
                 <div class="price d-flex">
                     <div class="hightprice d-md-flex">
-                        <p class="me-3"><del>原價 $ {{product.origin_price}}</del></p>
-                        <h5>現在只要 $ {{product.price}}</h5>
+                        <p class="me-3"><del>原價 $ {{currency(product.origin_price)}}</del></p>
+                        <h5>現在只要 $ {{currency(product.price)}}</h5>
                     </div>
                     <div class="lowpric"></div>
                 </div>
@@ -29,11 +29,15 @@
         </div>
     </div>
   </div>
+  <ToastMessages></ToastMessages>
   <Footer></Footer>
 </template>
 
 <script>
 import Footer from '../components/Footer.vue'
+import ToastMessages from '../components/ToastMessages.vue'
+import { currency } from '../methods/filters.js'
+
 export default {
   data () {
     return {
@@ -45,8 +49,10 @@ export default {
       }
     }
   },
-  components: { Footer },
+  components: { Footer, ToastMessages },
+  inject: ['emitter'],
   methods: {
+    currency,
     getoneproduct () {
       this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
@@ -67,6 +73,18 @@ export default {
         .then(res => {
           this.status.lodingitem = ''
           console.log(res)
+          if (res.data.success) {
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '已將租車券加入購物車!'
+            })
+          } else {
+            this.rmitter.emit('pish-message', {
+              style: 'danger',
+              title: '加入購物車失敗><',
+              content: res.data.message.join('、')
+            })
+          }
         })
     }
   },
