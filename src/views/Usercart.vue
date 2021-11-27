@@ -6,19 +6,19 @@
     <div class="row">
       <div class="col-md-3 mb-3 mb-md-0">
         <ul class="list-group">
-          <li class="list-group-item btn btn-primary" type="button" :class="{ 'bg-primary': this.mototype === '全部商品'}" @click="getCarts">
+          <li class="list-group-item btn btn-primary mb-4 mb-md-0" type="button" :class="{ 'bg-primary': this.mototype === '全部商品'}" @click="getCarts">
             全部商品
           </li>
-          <li class="list-group-item btn btn-primary" type="button" :class="{ 'bg-primary': this.mototype === '運動跑車'}" @click="getSport">
+          <li class="list-group-item btn btn-primary mb-4 mb-md-0" type="button" :class="{ 'bg-primary': this.mototype === '運動跑車'}" @click="getSport">
             運動跑車
           </li>
-          <li class="list-group-item btn btn-primary" type="button" :class="{ 'bg-primary': this.mototype === '街車'}" @click="getStree">
+          <li class="list-group-item btn btn-primary mb-4 mb-md-0" type="button" :class="{ 'bg-primary': this.mototype === '街車'}" @click="getStree">
             街車
           </li>
-          <li class="list-group-item btn btn-primary" type="button" :class="{ 'bg-primary': this.mototype === '越野，跨界'}" @click="getOffroad">
+          <li class="list-group-item btn btn-primary mb-4 mb-md-0" type="button" :class="{ 'bg-primary': this.mototype === '越野，跨界'}" @click="getOffroad">
             越野，跨界
           </li>
-          <li class="list-group-item btn btn-primary" type="button" :class="{ 'bg-primary': this.mototype === '人身部品'}" @click="getSafebody">
+          <li class="list-group-item btn btn-primary mb-4 mb-md-0" type="button" :class="{ 'bg-primary': this.mototype === '人身部品'}" @click="getSafebody">
             人身部品
           </li>
         </ul>
