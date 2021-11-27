@@ -20,6 +20,14 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
   {
+    path: '/know',
+    component: () => import('../views/Know.vue')
+  },
+  {
+    path: '/aboutus',
+    component: () => import('../views/Aboutus.vue')
+  },
+  {
     path: '/dashboard',
     component: () => import('../views/Dashboard.vue'),
     children: [
@@ -30,6 +38,10 @@ const routes = [
       {
         path: 'coupons',
         component: () => import('../views/Coupons.vue')
+      },
+      {
+        path: 'orders',
+        component: () => import('../views/Dashorders.vue')
       }
     ]
   },
@@ -46,13 +58,39 @@ const routes = [
         component: () => import('../views/Userproduct.vue')
       }
     ]
+  },
+  {
+    path: '/checkout',
+    component: () => import('../views/Checkout.vue'),
+    children: [
+      {
+        path: 'form',
+        component: () => import('../views/Checkoutform.vue')
+      },
+      {
+        path: 'order/:orderId',
+        component: () => import('../views/Order.vue')
+      }
+    ]
   }
 
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  linkActiveClass: 'active',
+  scrollBehavior (to, from, savedPosition) {
+    console.log(to, from, savedPosition)
+    if (to.fullPath.match('/user/cart')) {
+      return {
+        top: 500
+      }
+    }
+    // 這邊可以設定使用者到特定頁面的起始位置
+    // `to` 和 `from` 都是路由地址
+    // `savedPosition` 可以为空，如果没有的话。
+  }
 })
 
 export default router

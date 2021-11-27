@@ -4,7 +4,7 @@
   <div class="container mt-5 mb-5">
     <ToastMessages></ToastMessages>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 mb-3 mb-md-0">
         <ul class="list-group">
           <li class="list-group-item btn btn-primary" type="button" :class="{ 'bg-primary': this.mototype === '全部商品'}" @click="getCarts">
             全部商品
@@ -61,11 +61,13 @@
   </div>
   <button type="button" class="btn btn-outline-light bg-dark rounded-3 p-2 position-fixed bottom-0 end-0 me-5 mb-5"
    @click="openoffcanvas">
-   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{{ sendorderlength }}</span>
+   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+     {{ sendorderlength }}</span>
    <i class="bi bi-cart3 fs-1"></i>
    </button>
+   <Pagination v-if="pagination" :pages="pagination" @update-page="getCarts"></Pagination>
   <Footer></Footer>
-  <Cartoffcanvas ref="cartoffcanvas" @send="getcartslength"></Cartoffcanvas>
+  <Cartoffcanvas ref="cartoffcanvas"></Cartoffcanvas>
 
 </template>
 
@@ -73,6 +75,7 @@
 import ToastMessages from '../components/ToastMessages.vue'
 import Footer from '../components/Footer.vue'
 import Cartoffcanvas from '../components/Cartoffcanvas.vue'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   data () {
@@ -83,18 +86,20 @@ export default {
       status: {
         lodingitem: ''
       },
-      sendorderlength: ''
+      sendorderlength: '',
+      pagination: {}
     }
   },
-  components: { Footer, ToastMessages, Cartoffcanvas },
+  components: { Footer, ToastMessages, Cartoffcanvas, Pagination },
   inject: ['emitter'],
   methods: {
-    getCarts () {
+    getCarts (page = 1) {
       this.alltype = true
       this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=${page}`
       this.axios.get(url).then(res => {
         console.log(res)
+        this.pagination = res.data.pagination
         this.carts = res.data.products
         this.mototype = '全部商品'
         this.isLoading = false
@@ -112,6 +117,7 @@ export default {
           data.forEach((item) => {
             if (item.category === '運動跑車') {
               this.carts.push(item)
+              this.pagination = ''
               this.isLoading = false
             }
           })
@@ -129,6 +135,7 @@ export default {
           data.forEach((item) => {
             if (item.category === '街車') {
               this.carts.push(item)
+              this.pagination = ''
               this.isLoading = false
             }
           })
@@ -146,6 +153,7 @@ export default {
           data.forEach((item) => {
             if (item.category === '越野，跨界') {
               this.carts.push(item)
+              this.pagination = ''
               this.isLoading = false
             }
           })
@@ -163,6 +171,7 @@ export default {
           data.forEach((item) => {
             if (item.category === '人身部品') {
               this.carts.push(item)
+              this.pagination = ''
               this.isLoading = false
             }
           })
@@ -199,14 +208,18 @@ export default {
     openoffcanvas () {
       this.$refs.cartoffcanvas.getorders()
       this.$refs.cartoffcanvas.showoffcanvas()
-    },
-    getcartslength (item) {
-      this.sendorderlength = item
-      console.log('out', item)
     }
+    // getcartslength (item) {
+    //   this.sendorderlength = item
+    //   console.log('out', item)
+    // }
   },
   created () {
     this.getCarts()
+    this.emitter.on('send', data => {
+      console.log('send', data)
+      this.sendorderlength = data
+    })
   }
 }
 </script>

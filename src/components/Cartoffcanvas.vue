@@ -113,6 +113,13 @@
           <span class="text-success fw-bold fs-7">以使用優惠券</span>
           折扣價$ {{ currency(carts.final_total) }}
         </p>
+        <div class="d-flex justify-content-md-end mt-5">
+            <!-- <router-link to="/checkout/form" v-if="carts.total != 0">
+                <button type="button" class="btn btn-primary">結帳去!</button>
+            </router-link> -->
+             <button type="button" class="btn btn-primary" @click.prevent="gotocheckout"
+             v-if="carts.total != 0">結帳去!</button>
+        </div>
       </div>
     </div>
   </div>
@@ -210,14 +217,20 @@ export default {
           this.couponcode = ''
           this.getorders()
         })
+    },
+    gotocheckout () {
+      this.offcanvas.hide()
+      this.$router.push('/checkout/form')
     }
   },
   created () {
     this.getorders()
+    // this.emitter.emit('send', this.cartslength)
     // this.$emit('send', this.cartslength)
   },
   beforeUpdate () {
-    this.$emit('send', this.cartslength)
+    this.emitter.emit('send', this.cartslength)
+    // this.$emit('send', this.cartslength)
   },
   mounted () {
     const myOffcanvas = this.$refs.offcanvas

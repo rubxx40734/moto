@@ -42,19 +42,21 @@
     <div class="row mb-5" data-aos="fade-right" data-aos-duration="2000">
       <div class="col-md-6">
         <img
-          src="../assets/fix2.jpg"
+          src="../assets/order.jpg"
           alt=""
           class="h-350 w-100 bgCover card-img mb-4 mb-md-0"
         />
       </div>
       <div class="col-md-6 d-flex flex-column justify-content-center">
         <h2 class="text-center text-secondary fw-bold">
-          用心照顧每台車 讓您猶如試乘新車
+          政府定型化契約
         </h2>
         <p class="ff-r">
-          我們對於重機保養絕對不馬虎，機油只使用國際大廠美孚機油與mobil機油，例行性小保養與大保養
-          定時施工。消耗品只用原廠部品，絕非大陸次級品，再加上定期打蠟與鍍膜，能讓出租車保有一定行車質感，
-          讓您在短期承租期間，享受人車合一的喜悅，騎著騎著嘴角甚至會不自覺上揚呢。
+         定型化契約又稱為附合契約，於中國大陸稱格式合同，
+         另有稱附和契約、定式契約、附從契約及標準契約或稱盟約等，
+         指由一方當事人預先擬定契約之內容，並以此與不特定相對人訂定契約，
+         不特定相對人在訂定契約時無法磋商契約之內容，提供定型化契約的一方處於要約人的地位，
+         相對人則由承諾或拒絕要約之意思表示決定是否受契約拘束
         </p>
       </div>
     </div>
@@ -63,7 +65,7 @@
     <h3 class="mb-5 text-center text-secondary fw-bold">今晚.... 我想來點?</h3>
     <div class="row">
       <div class="col-md-4 box position-relative mb-4 mb-md-0">
-        <button class="btn btn-outline-light w-100" @click="changesports"
+        <button class="btn btn-outline-light w-100 text-secondary" @click="changesports"
           ><img
             class="cover-fit w-100 bgCover card-img"
             src="../assets/home1.jpg"
@@ -77,7 +79,7 @@
         </button>
       </div>
       <div class="col-md-4 box position-relative mb-4 mb-md-0">
-        <router-link to="/dashboard"
+        <button class="btn btn-outline-light w-100 text-secondary" @click="changesports"
           ><img
             class="cover-fit w-100 bgCover card-img"
             src="../assets/home2.jpg"
@@ -88,10 +90,10 @@
           >
             街車
           </h4>
-        </router-link>
+        </button>
       </div>
       <div class="col-md-4 box position-relative mb-4 mb-md-0">
-        <router-link to="/dashboard"
+       <button class="btn btn-outline-light w-100 text-secondary" @click="changesports"
           ><img
             class="cover-fit w-100 bgCover card-img"
             src="../assets/home3.jpg"
@@ -100,9 +102,9 @@
           <h4
             class="title p-5 position-absolute top-50 start-50 translate-middle"
           >
-            越野‧跨界
+            跨界，越野
           </h4>
-        </router-link>
+        </button>
       </div>
     </div>
   </div>
@@ -188,7 +190,7 @@ export default {
   methods: {
     changesports () {
       console.log(this.$router)
-      // this.$router.push('/user/cart')
+      this.$router.push('/user/cart')
     }
   },
   mounted () {

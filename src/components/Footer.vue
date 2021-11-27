@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6">
           <ul class="text-secondary ff-r">
-            <li class="fs-3">哈士騎重機租賃</li>
+            <li class="fs-3"><a href="#" class="text-secondary fs-2 texthover title2">哈士騎重機租賃</a></li>
             <li>© 2021. All Rights Reserved.</li>
             <li>※此網頁為作品 後台不得登入修改※</li>
           </ul>
