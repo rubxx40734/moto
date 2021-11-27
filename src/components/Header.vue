@@ -2,7 +2,7 @@
       <div ref="carousel"
   id="carouselExampleControlsNoTouching" class="carousel slide container-fluid position-relative p-0" data-bs-touch="false" data-bs-interval="false">
   <h1 class="position-absolute top-50 start-50
-  spaceTitle translate-middle title p-5">人生苦短 必須拉轉</h1>
+  spaceTitle translate-middle title p-5">人生苦短 <br> 必須拉轉</h1>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="../assets/banner-adv.jpg" class="d-block w-100 banner" alt="...">

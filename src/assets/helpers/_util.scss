@@ -66,9 +66,9 @@
 
 //式水溫 改變一下響應式字體大小
 .spaceTitle{
-    font-size: 64px;
+    font-size: 58px;
     @include pad(){
-        font-size: 32px;
+        font-size: 22px;
     }
 }
 
