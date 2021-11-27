@@ -1,6 +1,6 @@
 <template>
  <h1 class="mt-5 mb-5 text-center">請填寫資料</h1>
-  <Form v-slot="{ errors}" class="row g-3 mb-5 p-md-5 p-0 border d-block d-md-flex justify-content-center"
+  <Form v-slot="{ errors}" class="row g-3 mb-5 p-md-5 p-0 d-block d-md-flex justify-content-center"
    @submit="createorder">
     <div class="col-md-4">
       <label for="name" class="form-label">收件人姓名</label>

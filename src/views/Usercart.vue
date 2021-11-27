@@ -203,16 +203,16 @@ export default {
               content: res.data.message.join('、')
             })
           }
+          this.onlycreatedcartlength()
         })
     },
     openoffcanvas () {
       this.$refs.cartoffcanvas.getorders()
       this.$refs.cartoffcanvas.showoffcanvas()
+    },
+    onlycreatedcartlength () {
+      this.$refs.cartoffcanvas.getorders()
     }
-    // getcartslength (item) {
-    //   this.sendorderlength = item
-    //   console.log('out', item)
-    // }
   },
   created () {
     this.getCarts()
