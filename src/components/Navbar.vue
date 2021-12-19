@@ -16,9 +16,9 @@
         <li class="nav-item fw-bold">
            <router-link to="/aboutus" class="nav-link active text-secondary texthover" aria-current="page">關於我們</router-link>
         </li>
-        <li class="nav-item fw-bold">
+        <!-- <li class="nav-item fw-bold">
           <a class="nav-link text-secondary texthover" href="#" @click.prevent="gotodashboard">後台管理</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

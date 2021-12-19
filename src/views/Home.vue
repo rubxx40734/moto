@@ -72,7 +72,7 @@
             alt=""
           />
           <h4
-            class="title p-5 position-absolute top-50 start-50 translate-middle"
+            class="title text-danger p-5 position-absolute top-50 start-50 translate-middle"
           >
             跑車
           </h4>
@@ -86,7 +86,7 @@
             alt=""
           />
           <h4
-            class="title p-5 position-absolute top-50 start-50 translate-middle"
+            class="title text-danger p-5 position-absolute top-50 start-50 translate-middle"
           >
             街車
           </h4>
@@ -100,7 +100,7 @@
             alt=""
           />
           <h4
-            class="title p-5 position-absolute top-50 start-50 translate-middle"
+            class="title text-danger p-5 position-absolute top-50 start-50 translate-middle"
           >
             跨界，越野
           </h4>

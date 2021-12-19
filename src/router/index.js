@@ -83,6 +83,7 @@ const router = createRouter({
   scrollBehavior (to, from, savedPosition) {
     console.log(to, from, savedPosition)
     if (to.fullPath.match('/user/cart')) {
+      console.log(1020)
       return {
         top: 500
       }
@@ -95,6 +96,11 @@ const router = createRouter({
     if (from.fullPath.match('/checkout/form')) {
       return {
         top: 100
+      }
+    }
+    if (from.fullPath.match('/user/cart')) {
+      return {
+        top: 450
       }
     }
     // 這邊可以設定使用者到特定頁面的起始位置
