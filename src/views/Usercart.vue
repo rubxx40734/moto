@@ -1,6 +1,6 @@
 <template>
 <Loading :active="isLoading"></Loading>
-  <h1 class="text-center mt-5">車款總覽</h1>
+  <h1 class="text-center mt-5"  id="title">車款總覽</h1>
   <div class="container mt-5 mb-5">
     <ToastMessages></ToastMessages>
     <div class="row">
@@ -26,7 +26,7 @@
       <div class="col-md-9">
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <!-- <ToastMessages></ToastMessages> -->
-          <div class="col" v-for="item in carts" :key="item.id">
+          <div class="col" v-for="(item, index) in carts" :key="item.id" >
             <div class="card h-100 position-relative">
               <img
                 :src="item.imageUrl"
@@ -52,6 +52,10 @@
 
                 <span class="badge rounded-pill bg-danger
             position-absolute top-0 end-0">{{item.unit}}</span>
+                <button type="button" class="btn btn-sm btn-outline-warning
+            position-absolute top-0 start-0" @click="collet(index)"
+            :title="item.title">
+            <i class="bi bi-heart"></i></button>
               </div>
             </div>
           </div>
@@ -59,12 +63,22 @@
       </div>
     </div>
   </div>
+
+    <button type="button" v-if="this.heartlength != 0"
+    class="btn btn-outline-light bg-dark rounded-3 p-2 position-fixed bottom-0 end-0 me-3 mb-6"
+   @click="addheart">
+   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+     {{ heartlength }}</span>
+   <i class="bi bi-heart fs-2"></i>
+   </button>
+
   <button type="button" class="btn btn-outline-light bg-dark rounded-3 p-2 position-fixed bottom-0 end-0 me-3 mb-4"
    @click="openoffcanvas">
    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
      {{ sendorderlength }}</span>
-   <i class="bi bi-cart3 fs-1"></i>
+   <i class="bi bi-cart3 fs-2"></i>
    </button>
+   <Modal ref="colletmodal" :heartdata="pct"></Modal>
    <Pagination v-if="pagination" :pages="pagination" @update-page="getCarts"></Pagination>
   <Footer></Footer>
   <Cartoffcanvas ref="cartoffcanvas"></Cartoffcanvas>
@@ -76,6 +90,7 @@ import ToastMessages from '../components/ToastMessages.vue'
 import Footer from '../components/Footer.vue'
 import Cartoffcanvas from '../components/Cartoffcanvas.vue'
 import Pagination from '../components/Pagination.vue'
+import Modal from '../components/Collet.vue'
 
 export default {
   data () {
@@ -87,10 +102,12 @@ export default {
         lodingitem: ''
       },
       sendorderlength: '',
-      pagination: {}
+      pagination: {},
+      pct: [],
+      heartlength: ''
     }
   },
-  components: { Footer, ToastMessages, Cartoffcanvas, Pagination },
+  components: { Footer, ToastMessages, Cartoffcanvas, Pagination, Modal },
   inject: ['emitter'],
   methods: {
     getCarts (page = 1) {
@@ -98,11 +115,14 @@ export default {
       this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=${page}`
       this.axios.get(url).then(res => {
-        console.log(res)
         this.pagination = res.data.pagination
         this.carts = res.data.products
         this.mototype = '全部商品'
         this.isLoading = false
+        // 這邊用來讓視窗滾到指定的位置 非常重要~ 這招要記得
+        const scrollDiv = document.querySelector('#title').offsetTop
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
+        console.log(scrollDiv)
       })
     },
     getSport () {
@@ -180,6 +200,19 @@ export default {
     getproductid (id) {
       this.$router.push(`/user/product/${id}`)
     },
+    collet (index) {
+      console.log(this.carts[index].title)
+      const obj = {}
+      obj.title = this.carts[index].title
+      obj.img = this.carts[index].imageUrl
+      this.pct.push(obj)
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '已加入收藏٩(⚙ᴗ⚙)۶'
+      })
+      console.log(this.pct.length)
+      this.heartlength = this.pct.length
+    },
     addcart (id) {
       this.status.lodingitem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -212,6 +245,9 @@ export default {
     },
     onlycreatedcartlength () {
       this.$refs.cartoffcanvas.getorders()
+    },
+    addheart () {
+      this.$refs.colletmodal.openmodal()
     }
   },
   created () {
