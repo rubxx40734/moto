@@ -78,7 +78,7 @@
      {{ sendorderlength }}</span>
    <i class="bi bi-cart3 fs-2"></i>
    </button>
-   <Modal ref="colletmodal" :heartdata="pct"></Modal>
+   <Modal ref="colletmodal" :heartdata="pct" @remove="removelocalhost"></Modal>
    <Pagination v-if="pagination" :pages="pagination" @update-page="getCarts"></Pagination>
   <Footer></Footer>
   <Cartoffcanvas ref="cartoffcanvas"></Cartoffcanvas>
@@ -104,7 +104,9 @@ export default {
       sendorderlength: '',
       pagination: {},
       pct: [],
-      heartlength: ''
+      localpct: [],
+      heartlength: '',
+      locolhost: []
     }
   },
   components: { Footer, ToastMessages, Cartoffcanvas, Pagination, Modal },
@@ -122,7 +124,6 @@ export default {
         // 這邊用來讓視窗滾到指定的位置 非常重要~ 這招要記得
         const scrollDiv = document.querySelector('#title').offsetTop
         window.scrollTo({ top: scrollDiv, behavior: 'smooth' })
-        console.log(scrollDiv)
       })
     },
     getSport () {
@@ -212,6 +213,7 @@ export default {
       })
       console.log(this.pct.length)
       this.heartlength = this.pct.length
+      localStorage.setItem('love', JSON.stringify(this.pct))
     },
     addcart (id) {
       this.status.lodingitem = id
@@ -248,12 +250,30 @@ export default {
     },
     addheart () {
       this.$refs.colletmodal.openmodal()
+    },
+    removelocalhost () {
+      localStorage.removeItem('love')
+      this.emitter.emit('push-message', {
+        style: 'danger',
+        title: '已清空收藏列表><'
+      })
+      this.pct = []
+      this.heartlength = 0
+    }
+  },
+  mounted () {
+    this.localpct = JSON.parse(localStorage.getItem(('love')))
+    console.log(this.localpct)
+    if (this.localpct != null) {
+      this.localpct.forEach(item => {
+        this.pct.push(item)
+        this.heartlength = this.pct.length
+      })
     }
   },
   created () {
     this.getCarts()
     this.emitter.on('send', data => {
-      console.log('send', data)
       this.sendorderlength = data
     })
   }
